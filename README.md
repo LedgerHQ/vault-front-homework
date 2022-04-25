@@ -12,7 +12,7 @@ You will be provided with a backend with a search endpoint that handles the serv
 ⚠️ There is a bug in the search code that you will have to fix 😏 
 
 The current frontend is very minimal and you will be in charge to:
-- style the layout to match the above mockups (mockups are just here to give general idea, don't hesitate to choose any color scheme you like)
+- develop a nice UI/UX experience. Mockups in this document just give a rough indications of what are the features of the application. Feel free to implement any layout you find pretty and that offers the best UX experience
 - create any components you would need and feel free to restructure the files architecture
 - ⚠️ we intentionnally put some bugs/problems in the code, happy debugging 🥳
 - add code quality tools (linting, formating)
