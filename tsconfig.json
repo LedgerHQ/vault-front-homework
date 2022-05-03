@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "components/*": ["./src/components/*"]
+    },
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Basic Options */
