@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Input from 'components/Input';
-
-const API = 'http://localhost:5000';
+import { API } from './constants';
+import Spinner from 'components/Spinner';
 
 type Notif = {
     id: string;
@@ -41,7 +41,7 @@ const App = () => {
                 placeholder="Type to filter events"
             />
             {isLoading ? (
-                <div>{'Loading...'}</div>
+                <Spinner />
             ) : results ? (
                 <div>
                     {results.map((r) => (
