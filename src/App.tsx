@@ -8,8 +8,13 @@ const API = 'http://localhost:5000';
 type Notif = {
     id: string;
     type: string;
-    // FIXME we should *probably* not have this `any`
-    data: any;
+    data: {
+        amount: number;
+        from: string;
+        id: number;
+        to: string;
+        unit: string;
+    };
 };
 
 const App = () => {
@@ -19,10 +24,10 @@ const App = () => {
 
     useEffect(() => {
         const effect = async () => {
-            // FIXME there is something wrong with this loading state... to be investigated :D
             setLoading(true);
             const res = await fetch(`${API}/search?q=${searchText}`);
             const data = await res.json();
+            setLoading(false);
             setResults(data);
         };
         effect();

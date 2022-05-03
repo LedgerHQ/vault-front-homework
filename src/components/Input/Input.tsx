@@ -8,8 +8,7 @@ type Props = {
 };
 
 const Input = ({ value, onChange, placeholder }: Props) => {
-    // FIXME `any` is not perfect
-    const handleChange = (e: any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
     };
     return (
