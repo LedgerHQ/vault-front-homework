@@ -8,6 +8,7 @@
   "dependencies": {
     "@emotion/react": "11.9.0",
     "@emotion/styled": "11.8.1",
+    "@mui/icons-material": "5.6.2",
     "@mui/material": "5.6.4",
     "axios": "0.27.2",
     "react": "^17.0.2",
@@ -29,7 +30,8 @@
   "alias": {
     "components/*": "./src/components/$1",
     "types/*": "./src/types/$1",
-    "services/*": "./src/services/$1"
+    "services/*": "./src/services/$1",
+    "helpers/*": "./src/helpers/$1"
   },
   "private": true
 }
