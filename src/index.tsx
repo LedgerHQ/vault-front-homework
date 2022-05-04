@@ -5,6 +5,8 @@ import App from './App';
 import GlobalStyle from './GlobalStyle';
 import { SWRConfig } from 'swr';
 import { apiRequest } from 'services/ApiRequests';
+import { ThemeProvider } from '@mui/material';
+import theme from './theme';
 
 const rootNode = document.getElementById('root');
 
@@ -19,7 +21,9 @@ render(
                 fetcher: apiRequest,
             }}
         >
-            <App />
+            <ThemeProvider theme={theme}>
+                <App />
+            </ThemeProvider>
         </SWRConfig>
     </>,
     rootNode,
