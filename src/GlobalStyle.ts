@@ -18,6 +18,7 @@ export default createGlobalStyle`
 
   body {
     padding: 24px;
+    font-family: 'Lato', sans-serif;
     height: 100%;
   }
   
