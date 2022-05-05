@@ -9,7 +9,7 @@ const StyledSpinner = styled.div`
     width: 4rem;
     height: 4rem;
     border: 5px solid #f3f3f3;
-    border-top: 6px solid #9c41f2;
+    border-top: 6px solid #0268ed;
     border-radius: 100%;
     margin: auto;
     visibility: visible;

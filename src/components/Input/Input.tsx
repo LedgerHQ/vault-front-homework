@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TextField } from '@mui/material';
 
 type Props = {
     placeholder: string;
@@ -12,14 +13,17 @@ const Input = ({ value, onChange, placeholder }: Props) => {
         onChange(e.target.value);
     };
     return (
-        <StyledInput type="text" value={value} onChange={handleChange} placeholder={placeholder} />
+        <StyledTextField
+            type="text"
+            value={value}
+            onChange={handleChange}
+            placeholder={placeholder}
+        />
     );
 };
 
-const StyledInput = styled.input`
-    padding: 8px;
-    border: 1px solid hsl(0, 0%, 10%);
-    border-radius: 4px;
+const StyledTextField = styled(TextField)`
+    width: 30vw;
 `;
 
 export default Input;

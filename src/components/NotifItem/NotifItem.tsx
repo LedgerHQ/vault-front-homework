@@ -51,6 +51,7 @@ const NotifItem = ({ notification }: { notification: Notif }) => {
 
 const StyledPaper = styled(Paper)`
     margin-bottom: 1rem;
+    width: 100%;
     padding: 1rem;
 `;
 
