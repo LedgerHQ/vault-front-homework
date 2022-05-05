@@ -31,7 +31,8 @@
     "components/*": "./src/components/$1",
     "types/*": "./src/types/$1",
     "services/*": "./src/services/$1",
-    "helpers/*": "./src/helpers/$1"
+    "helpers/*": "./src/helpers/$1",
+    "images/*": "./src/images/$1"
   },
   "private": true
 }
