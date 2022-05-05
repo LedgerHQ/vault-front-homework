@@ -1,0 +1,15 @@
+name: Lint
+
+on: [pull_request, push]
+
+jobs: # list of things to do
+  linting:
+    name: Linting
+    runs-on: ubuntu-latest # on which machine to run
+    steps: # list of steps
+      - name: Code Checkout
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: yarn
+      - name: Code Linting
+        run: yarn run lint

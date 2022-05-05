@@ -8,7 +8,7 @@ import CallReceivedIcon from '@mui/icons-material/CallReceived';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
-export const getIcon = (type: string) => {
+const getIcon = (type: string) => {
     switch (type) {
         case EVENT_TYPES.ACCOUNT_CREATED:
             return <AccountBalanceWalletIcon />;
