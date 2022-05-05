@@ -7,6 +7,7 @@ import { getEventType } from 'helpers/utils';
 import CallReceivedIcon from '@mui/icons-material/CallReceived';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import theme from '../../theme';
 
 const getIcon = (type: string) => {
     switch (type) {
@@ -20,9 +21,16 @@ const getIcon = (type: string) => {
 };
 
 const NotifItem = ({ notification }: { notification: Notif }) => {
+    const type = getEventType(notification);
+    const colorPerType =
+        type === 'Received'
+            ? theme.palette.primary.main
+            : type === 'Sent'
+            ? theme.palette.secondary.main
+            : '#000000';
     return (
-        <StyledPaper>
-            <StyledGrid container>
+        <StyledPaper color={colorPerType} elevation={3}>
+            <StyledGrid container color={colorPerType}>
                 <StyledGrid item xs={3}>
                     <StyledDiv>{getIcon(notification.type)}</StyledDiv>
                     <Typography>{getEventType(notification)}</Typography>
@@ -53,6 +61,11 @@ const StyledPaper = styled(Paper)`
     margin-bottom: 1rem;
     width: 100%;
     padding: 1rem;
+    background-color: ${(props: { color: string }) => props.color};
+
+    &:hover {
+        background-color: #ece5e5;
+    }
 `;
 
 const StyledGrid = styled(Grid)`
