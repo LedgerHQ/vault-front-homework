@@ -15,7 +15,7 @@ def search_handler():
     search_text = request.args.get('q')
     if not search_text:
         return jsonify(mock_data)
-    filtered = [x for x in mock_data if search_text in x['type'].lower()]
+    filtered = [x for x in mock_data if search_text.lower() in x['type'].lower()]
     return jsonify(filtered)
 
 if __name__ == '__main__':
