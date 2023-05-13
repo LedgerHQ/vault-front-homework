@@ -1,4 +1,8 @@
-import { ChangeEventHandler, DetailedHTMLProps, InputHTMLAttributes } from "react";
+import type {
+  ChangeEventHandler,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+} from "react";
 
 type Props = Omit<
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
@@ -9,8 +13,16 @@ type Props = Omit<
 
 const TextInput = (props: Props) => {
   const { onChange, ...p } = props;
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => onChange(e.target.value);
-  return <input className="border-4 p-2" type="text" onChange={handleChange} {...p} />;
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) =>
+    onChange(e.target.value);
+  return (
+    <input
+      className="border-4 p-2"
+      type="text"
+      onChange={handleChange}
+      {...p}
+    />
+  );
 };
 
 export default TextInput;

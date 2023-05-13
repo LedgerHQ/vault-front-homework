@@ -1,44 +1,42 @@
 import { useEffect, useState } from "react";
+import { Loader } from "./components/Loader";
+import { Result } from "./components/Result";
 import TextInput from "./components/TextInput";
-
-const API = "http://localhost:5000";
-
-type Notif = {
-  id: string;
-  type: string;
-  // FIXME we should *probably* not have this `any`
-  data: any;
-};
+import { getData } from "./services";
+import type { Notif } from "./types";
 
 const App = () => {
   const [searchText, setSearchText] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const [results, setResults] = useState<null | Notif[]>(null);
+  const [results, setResults] = useState<Notif[]>([]);
 
   useEffect(() => {
-    const effect = async () => {
-      // FIXME there is something wrong with this loading state... to be investigated :D
+    (async () => {
       setLoading(true);
-      const res = await fetch(`${API}/search?q=${searchText}`);
-      const data = await res.json();
+      const data = await getData(searchText);
       setResults(data);
-    };
-    effect();
+      setLoading(false);
+    })();
   }, [searchText, setLoading, setResults]);
+
+  console.log({ results });
 
   return (
     <div>
-      <TextInput value={searchText} onChange={setSearchText} placeholder="Type to filter events" />
-      {isLoading ? (
-        <div>{"Loading..."}</div>
-      ) : results ? (
+      <TextInput
+        value={searchText}
+        onChange={setSearchText}
+        placeholder="Type to filter events"
+      />
+      {isLoading && <Loader />}
+      {!isLoading && results.length === 0 && <div>{"No result found"}</div>}
+      {!isLoading && results.length > 0 && (
         <div>
           {results.map((r) => (
-            // TODO we must finalize this integration!! not very pretty like this
-            <div className="border border-dashed">{JSON.stringify(r)}</div>
+            <Result data={r} key={r.id} />
           ))}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
