@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { clsx } from "clsx";
-import { Loader } from "./Loader";
+import { Loader } from "../Loader/Loader";
 
 import type {
   ChangeEventHandler,
@@ -25,7 +25,7 @@ type Props = Omit<
   value: string;
 };
 
-const TextInput = (props: Props) => {
+export const TextInput = (props: Props) => {
   const { value, onChange, validateSearch, isLoading, ...p } = props;
   const [text, setText] = useState("");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
@@ -164,5 +164,3 @@ const TextInput = (props: Props) => {
     </div>
   );
 };
-
-export default TextInput;

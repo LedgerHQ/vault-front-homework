@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": [
     "plugin:prettier/recommended",
@@ -23,7 +24,7 @@
       }
     }
   ],
-  "plugins": ["react", "@typescript-eslint", "jsx-a11y", "import"],
+  "plugins": ["react", "@typescript-eslint", "jsx-a11y", "import", "jest"],
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/consistent-type-imports": "error",

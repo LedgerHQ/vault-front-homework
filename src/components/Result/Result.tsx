@@ -1,4 +1,4 @@
-import type { Notif } from "../types";
+import type { Notif } from "../../types";
 
 type Props = {
   data: Notif;
