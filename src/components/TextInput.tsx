@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { clsx } from "clsx";
 
 import type {
   ChangeEventHandler,
@@ -7,6 +8,12 @@ import type {
   InputHTMLAttributes,
 } from "react";
 import { Loader } from "./Loader";
+
+const autocompleteOptions = [
+  "ACCOUNT_CREATED",
+  "TRANSACTION_SENT",
+  "TRANSACTION_RECEIVED",
+];
 
 type Props = Omit<
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
@@ -17,25 +24,48 @@ type Props = Omit<
   isLoading: boolean;
 };
 
-const autocompleteOptions = [
-  "ACCOUNT_CREATED",
-  "TRANSACTION_SENT",
-  "TRANSACTION_RECEIVED",
-];
-
 const TextInput = (props: Props) => {
   const { onChange, validateSearch, isLoading, ...p } = props;
   const [text, setText] = useState("");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setText(e.target.value);
     onChange(e.target.value);
   };
 
+  const filteredAutocompleteItems = useMemo(() => {
+    return autocompleteOptions.filter(
+      (option) => option.startsWith(text.toUpperCase()) || text === ""
+    );
+  }, [text]);
+
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Enter") validateSearch(text);
-    if (e.key === "Escape") setShowAutocomplete(false);
+    const selectedItem = filteredAutocompleteItems[selectedIndex] || "";
+    switch (e.key) {
+      case "Enter":
+        if (selectedItem) {
+          setText(selectedItem);
+          onChange(selectedItem);
+        }
+        validateSearch(selectedItem || text);
+        setShowAutocomplete(false);
+        break;
+
+      case "Escape":
+        setShowAutocomplete(false);
+        break;
+
+      case "ArrowUp":
+        setSelectedIndex((i) => (i >= 0 ? i - 1 : i));
+        break;
+
+      case "ArrowDown":
+        setSelectedIndex((i) =>
+          i < autocompleteOptions.length - 1 ? i + 1 : i
+        );
+    }
   };
 
   useEffect(() => {
@@ -94,31 +124,31 @@ const TextInput = (props: Props) => {
         </div>
         {showAutocomplete && (
           <div className="shadow-xl absolute w-full top-12 left-0 bg-white">
-            {autocompleteOptions.map((option) => {
-              if (option.startsWith(text.toUpperCase()) || text === "")
-                return (
-                  <div
-                    className="lowercase p-2 hover:bg-blue-200"
-                    onClick={() => {
-                      onChange(option);
-                      validateSearch(option);
-                      setShowAutocomplete(false);
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        onChange(option);
-                        validateSearch(option);
-                        setShowAutocomplete(false);
-                      }
-                    }}
-                  >
-                    {option}
-                  </div>
-                );
-              return "";
-            })}
+            {filteredAutocompleteItems.map((option, index) => (
+              <div
+                key={option}
+                className={clsx(
+                  { "bg-blue-200": index === selectedIndex },
+                  "lowercase p-2 hover:bg-blue-200"
+                )}
+                onClick={() => {
+                  onChange(option);
+                  validateSearch(option);
+                  setShowAutocomplete(false);
+                }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    onChange(option);
+                    validateSearch(option);
+                    setShowAutocomplete(false);
+                  }
+                }}
+              >
+                {option}
+              </div>
+            ))}
           </div>
         )}
       </div>

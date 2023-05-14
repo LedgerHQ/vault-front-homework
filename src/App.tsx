@@ -54,11 +54,17 @@ const App = () => {
       {!isLoading && (
         <div
           className="mt-4 underline cursor-pointer w-3"
-          onClick={() => setSearchValue("")}
+          onClick={() => {
+            setSearchText("");
+            setSearchValue("");
+          }}
           role="button"
           tabIndex={0}
           onKeyDown={(e) => {
-            if (e.key === "Enter") setSearchValue("");
+            if (e.key === "Enter") {
+              setSearchText("");
+              setSearchValue("");
+            }
           }}
         >
           {"Reset"}
