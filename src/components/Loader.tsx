@@ -1,8 +1,8 @@
-export const Loader = () => (
+export const Loader = ({ width = 24, height = 24 }) => (
   <div className="flex items-center gap-1">
     <svg
-      width="16"
-      height="16"
+      width={width}
+      height={height}
       viewBox="0 0 38 38"
       xmlns="http://www.w3.org/2000/svg"
       stroke="black"
@@ -15,6 +15,5 @@ export const Loader = () => (
         </g>
       </g>
     </svg>
-    Loading
   </div>
 );

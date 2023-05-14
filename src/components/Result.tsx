@@ -12,7 +12,7 @@ export const Result = ({ data }: Props) => {
       {data.type === "ACCOUNT_CREATED" && (
         <>
           <div className="flex gap-4">
-            <div className="w-6 h-6 bg-red-400 rounded-full"></div>
+            <div className="w-6 h-6 bg-red-400 rounded-full" />
             <div>{"Created"}</div>
           </div>
           <div>{data.data.currency}</div>
@@ -22,7 +22,7 @@ export const Result = ({ data }: Props) => {
       {data.type === "TRANSACTION_RECEIVED" && (
         <>
           <div className="flex gap-4">
-            <div className="w-6 h-6 bg-blue-400 rounded-full"></div>
+            <div className="w-6 h-6 bg-blue-400 rounded-full" />
             <div>{"Received"}</div>
           </div>
           <div>
@@ -37,7 +37,7 @@ export const Result = ({ data }: Props) => {
       {data.type === "TRANSACTION_SENT" && (
         <>
           <div className="flex gap-4">
-            <div className="w-6 h-6 bg-green-400 rounded-full"></div>
+            <div className="w-6 h-6 bg-green-400 rounded-full" />
             <div>{"Sent"}</div>
           </div>
           <div>
