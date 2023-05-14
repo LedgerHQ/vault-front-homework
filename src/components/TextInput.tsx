@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { clsx } from "clsx";
+import { Loader } from "./Loader";
 
 import type {
   ChangeEventHandler,
@@ -7,7 +8,6 @@ import type {
   KeyboardEvent,
   InputHTMLAttributes,
 } from "react";
-import { Loader } from "./Loader";
 
 const autocompleteOptions = [
   "ACCOUNT_CREATED",
@@ -22,17 +22,22 @@ type Props = Omit<
   onChange: (value: string) => void;
   validateSearch: (value: string) => void;
   isLoading: boolean;
+  value: string;
 };
 
 const TextInput = (props: Props) => {
-  const { onChange, validateSearch, isLoading, ...p } = props;
+  const { value, onChange, validateSearch, isLoading, ...p } = props;
   const [text, setText] = useState("");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
+  const updateValue = (value: string) => {
+    setText(value);
+    onChange(value);
+  };
+
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setText(e.target.value);
-    onChange(e.target.value);
+    updateValue(e.target.value);
   };
 
   const filteredAutocompleteItems = useMemo(() => {
@@ -46,8 +51,7 @@ const TextInput = (props: Props) => {
     switch (e.key) {
       case "Enter":
         if (selectedItem) {
-          setText(selectedItem);
-          onChange(selectedItem);
+          updateValue(selectedItem);
         }
         validateSearch(selectedItem || text);
         setShowAutocomplete(false);
@@ -79,6 +83,10 @@ const TextInput = (props: Props) => {
     };
   }, []);
 
+  useEffect(() => {
+    setText(value);
+  }, [value]);
+
   return (
     <div
       className="relative w-full"
@@ -98,6 +106,7 @@ const TextInput = (props: Props) => {
             onKeyDown={handleKeyDown}
             onFocus={() => setShowAutocomplete(true)}
             disabled={isLoading}
+            value={value}
             {...p}
           />
           <div className="absolute top-3 right-4">
@@ -132,7 +141,7 @@ const TextInput = (props: Props) => {
                   "lowercase p-2 hover:bg-blue-200"
                 )}
                 onClick={() => {
-                  onChange(option);
+                  updateValue(option);
                   validateSearch(option);
                   setShowAutocomplete(false);
                 }}
@@ -140,7 +149,7 @@ const TextInput = (props: Props) => {
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    onChange(option);
+                    updateValue(option);
                     validateSearch(option);
                     setShowAutocomplete(false);
                   }
