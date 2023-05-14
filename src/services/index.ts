@@ -5,7 +5,6 @@ export const getData = async (text: string) => {
     const res = await fetch(`${API}/search?q=${text}`);
     return await res.json();
   } catch (e) {
-    console.error(e);
     return "";
   }
 };

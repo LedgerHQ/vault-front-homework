@@ -50,7 +50,15 @@ const TextInput = (props: Props) => {
   }, []);
 
   return (
-    <div className="relative w-full" onClick={(e) => e.stopPropagation()}>
+    <div
+      className="relative w-full"
+      onClick={(e) => e.stopPropagation()}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") e.stopPropagation();
+      }}
+    >
       <div className="w-full flex-1 flex-col">
         <div className="relative">
           <input
@@ -66,8 +74,20 @@ const TextInput = (props: Props) => {
             {isLoading ? (
               <Loader />
             ) : (
-              <div onClick={() => validateSearch(text)}>
-                <img src="/public/search.svg" width={24} height={24} />
+              <div
+                onClick={() => validateSearch(text)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") validateSearch(text);
+                }}
+              >
+                <img
+                  src="/public/search.svg"
+                  width={24}
+                  height={24}
+                  alt="search button"
+                />
               </div>
             )}
           </div>
@@ -80,10 +100,18 @@ const TextInput = (props: Props) => {
                   <div
                     className="lowercase p-2 hover:bg-blue-200"
                     onClick={() => {
-                      console.log({ option });
                       onChange(option);
                       validateSearch(option);
                       setShowAutocomplete(false);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        onChange(option);
+                        validateSearch(option);
+                        setShowAutocomplete(false);
+                      }
                     }}
                   >
                     {option}

@@ -5,8 +5,6 @@ type Props = {
 };
 
 export const Result = ({ data }: Props) => {
-  console.log({ data });
-
   return (
     <div className="border border-black p-4 flex gap-4 items-center mt-4 justify-between">
       {data.type === "ACCOUNT_CREATED" && (
