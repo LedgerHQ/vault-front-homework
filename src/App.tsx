@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import TextInput from "./components/TextInput";
+import { useEffect, useState } from 'react';
+import TextInput from './components/TextInput';
 
-const API = "http://localhost:5000";
+const API = 'http://localhost:5000';
 
 type SearchResult = {
   id: string;
@@ -15,8 +15,8 @@ type SearchResult = {
   };
 };
 
-const App = () => {
-  const [searchText, setSearchText] = useState("");
+function App() {
+  const [searchText, setSearchText] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [results, setResults] = useState<null | SearchResult[]>(null);
 
@@ -40,19 +40,21 @@ const App = () => {
         placeholder="Type to filter events"
       />
       {isLoading ? (
-        <div>{"Loading..."}</div>
-      ) : results ? (
-        <div>
-          {results.map((r) => (
-            // TODO we must finalize this integration!! not very pretty like this
-            <div key={r.id} className="border border-dashed">
-              {JSON.stringify(r)}
-            </div>
-          ))}
-        </div>
-      ) : null}
+        <div>Loading...</div>
+      ) : (
+        results && (
+          <div>
+            {results.map((r) => (
+              // TODO we must finalize this integration!! not very pretty like this
+              <div key={r.id} className="border border-dashed">
+                {JSON.stringify(r)}
+              </div>
+            ))}
+          </div>
+        )
+      )}
     </div>
   );
-};
+}
 
 export default App;
