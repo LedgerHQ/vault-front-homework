@@ -8,7 +8,9 @@ Your challenge is to build a simple and intuitive interface for searching throug
 
 ### Figma Design
 
-Here’s the design you’ll be implementing: **[Figma link](https://www.figma.com/design/AwC58Mqda2ZOjqzadPdiso/LES---Front-end-homework?node-id=0-1)**
+Here’s the design you’ll be implementing: **[Figma prototype](https://www.figma.com/proto/AwC58Mqda2ZOjqzadPdiso/LES---Front-end-homework?page-id=&node-id=1-4741&p=f&t=Dx21H0F2ytviGHvl-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A4741)**
+
+All the available material can be found from this link: **[Figma components](https://www.figma.com/design/AwC58Mqda2ZOjqzadPdiso/LES---Front-end-homework?node-id=0-1)**
 
 The password will be provided to you by email.
 
